@@ -20,8 +20,7 @@ public class HomeController {
     public String test(Model model) {
         String value = env.getProperty("spring.application.name");
         model.addAttribute("value", value);
-
-        productService.getAll();
+        model.addAttribute("products", productService.getAll());
 
         return "home/index.html";
     }

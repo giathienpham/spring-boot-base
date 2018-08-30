@@ -1,18 +1,16 @@
 package com.example.demo.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-public class User {
+public class User{
     private int id;
     private String username;
     private String password;
     private String email;
+    private int roleId;
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private Timestamp deletedAt;
@@ -58,6 +56,16 @@ public class User {
     }
 
     @Basic
+    @Column(name = "role_id", nullable = false)
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    @Basic
     @Column(name = "created_at", nullable = false)
     public Timestamp getCreatedAt() {
         return createdAt;
@@ -93,6 +101,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id &&
+                roleId == user.roleId &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(email, user.email) &&
@@ -103,6 +112,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, email, createdAt, updatedAt, deletedAt);
+        return Objects.hash(id, username, password, email, roleId, createdAt, updatedAt, deletedAt);
     }
 }
